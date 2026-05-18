@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS currencies(
     currency_code TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS crypto_prices_observations(
+CREATE TABLE IF NOT EXISTS crypto_price_observations(
     observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
     coin_key INTEGER NOT NULL,
     currency_key INTEGER NOT NULL,
