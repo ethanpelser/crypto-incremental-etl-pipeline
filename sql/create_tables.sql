@@ -22,5 +22,5 @@ CREATE TABLE IF NOT EXISTS crypto_price_observations(
     FOREIGN KEY (coin_key) REFERENCES coins(coin_key),
     FOREIGN KEY (currency_key) REFERENCES currencies(currency_key),
 
-    UNIQUE (observation_id, currency_key, coin_key)
+    UNIQUE (price_timestamp, currency_key, coin_key)
 );
