@@ -2,6 +2,7 @@ from create_database import create_database
 from extract import extract_all_coins
 from transform import transform_all_coins
 from load import load_incremental_data
+from validate import run_validation_checks
 
 def run_pipeline():
     """
@@ -12,17 +13,20 @@ def run_pipeline():
     print("STARTING NORMALIZED CRYPTO INCREMENTAL ETL PIPELINE")
     print("=" * 60)
 
-    print("\n[1/4] Creating database...")
+    print("\n[1/5] Creating database...")
     create_database()
 
-    print("\n[2/4] Extracting crypto data...")
+    print("\n[2/5] Extracting crypto data...")
     extract_all_coins()
 
-    print("\n[3/4] Transforming raw JSON...")
+    print("\n[3/5 Transforming raw JSON...")
     transform_all_coins()
 
-    print("\n[4/4] Loading new records incrementally...")
+    print("\n[4/5] Loading new records incrementally...")
     load_incremental_data()
+
+    print("\n[5/5] Running validation checks...")
+    run_validation_checks()
 
     print("\nPipeline completed successfully.")
 
