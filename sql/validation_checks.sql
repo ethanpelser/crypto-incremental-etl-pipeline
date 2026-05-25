@@ -44,12 +44,12 @@ WHERE price <= 0;
 -- Check orphaned coin foreign keys
 SELECT *
 FROM crypto_price_observations o
-JOIN coins c ON o.coin_key = c.coin_key
+LEFT JOIN coins c ON o.coin_key = c.coin_key
 WHERE c.coin_key IS NULL;
 
 -- Check for orphaned curreny foreign keys
 SELECT *
 FROM crypto_price_observations o 
-JOIN currencies c ON o.currency_key = c.currency_key
+LEFT JOIN currencies c ON o.currency_key = c.currency_key
 WHERE c.currency_key IS NULL;
     

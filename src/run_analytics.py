@@ -36,7 +36,7 @@ def run_analytics():
 
         else:
             print("No results returned")
-    conn.close
+    conn.close()
 
 if __name__ == "__main__":
     run_analytics()
