@@ -1,5 +1,11 @@
 # Crypto Incremental ETL Pipeline
 
+## dashboard!!
+
+<a href="https://crypto-incremental-etl-pipeline-7mudqkjm8pfe56slfn6y8j.streamlit.app" target="_blank">
+  View Live Crypto ETL Dashboard
+</a>
+
 ## Overview
 
 This project is a local incremental ETL pipeline that extracts cryptocurrency market data from the CoinGecko API, transforms the raw JSON response into clean tabular data, and loads it into a normalized SQLite database.
