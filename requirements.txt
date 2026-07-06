@@ -2,3 +2,9 @@ pandas
 requests
 SQLAlchemy
 pytest
+fastapi
+uvicorn
+streamlit
+pandas
+plotly
+requests
