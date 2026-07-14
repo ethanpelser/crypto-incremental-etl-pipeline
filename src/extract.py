@@ -5,7 +5,7 @@ import time
 from datetime import datetime, timedelta, timezone
 import sqlite3
 
-BASE_URL = "https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
+BASE_URL = "https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart/range"
 DB_PATH = Path("crypto_prices.db")
 
 COINS = {"bitcoin": "Bitcoin",
@@ -117,11 +117,13 @@ def extract_coin_data(coin_id):
     response = requests.get(url, params = params, timeout = 30)
     response.raise_for_status()
 
+    data = response.json()
+
     print(
         f"Fetched {len(data.get('prices', []))} "
         f"new observations for {coin_id}."
     )
-    data = response.json()
+    
     return data
 
 def save_raw_data(data, coin_id):
