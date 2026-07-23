@@ -40,7 +40,11 @@ def transform_coin_data(coin_id, coin_name):
     df["coin_id"] = coin_id
     df["coin_name"] = coin_name
     df["currency_code"] = CURRENCY
-    df["price_timestamp"] = pd.to_datetime(df["timestamp_ms"], unit = "ms").astype(str)
+    df["price_timestamp"] = pd.to_datetime(
+        df["timestamp_ms"],
+        unit="ms",
+        utc=True,
+    )
 
     df = df[[
         "coin_id",
