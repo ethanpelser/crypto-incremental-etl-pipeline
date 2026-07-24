@@ -36,7 +36,6 @@ def transform_coin_data(coin_id, coin_name):
 
     df = prices.merge(market_caps, on = "timestamp_ms")
     df = df.merge(volumes, on = "timestamp_ms")
-
     df["coin_id"] = coin_id
     df["coin_name"] = coin_name
     df["currency_code"] = CURRENCY
@@ -44,8 +43,7 @@ def transform_coin_data(coin_id, coin_name):
         pd.to_datetime(df["timestamp_ms"], unit="ms", utc=True)  
         .dt.tz_localize(None)
         .dt.strftime("%Y-%m-%d %H:%M:%S")
-    )
-    df["price_timestamp"] = df["price_timestamp"].dt.strftime("%Y-%m-%d %H:%M:%S")    
+    ) 
 
     df = df[[
         "coin_id",
