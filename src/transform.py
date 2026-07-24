@@ -3,18 +3,15 @@ from pathlib import Path
 import pandas as pd
 
 
-COINS = {
-    "bitcoin": "Bitcoin",
-    "ethereum": "Ethereum"
-}
+RAW_DATA_PATH = Path("data/raw")
 
 CURRENCY = "usd"
 
-def transform_coin_data(coin_id, coin_name):
+def transform_coin_data(raw_file):
     """Load the raw data, clean it and save it as csv
     """
-
-    raw_file = Path(f"data/raw/{coin_id}_raw.json")
+    coin_id = raw_file.stem
+    coin_name = coin_id.replace("_", " ").title()
 
     with open(raw_file, "r", encoding = "utf-8") as file:
         data = json.load(file)
@@ -36,9 +33,11 @@ def transform_coin_data(coin_id, coin_name):
 
     df = prices.merge(market_caps, on = "timestamp_ms")
     df = df.merge(volumes, on = "timestamp_ms")
+
     df["coin_id"] = coin_id
     df["coin_name"] = coin_name
     df["currency_code"] = CURRENCY
+
     df["price_timestamp"] = (
         pd.to_datetime(df["timestamp_ms"], unit="ms", utc=True)  
         .dt.tz_localize(None)
@@ -70,10 +69,17 @@ def transform_all_coins():
     Transform all raw coin JSON files into one cleaned CSV.
     """
 
+    raw_files = sorted(RAW_DATA_PATH.glob("*.json"))
+
+    if not raw_files:
+        raise FileNotFoundError("No JSON files found in data/raw.")
+
+
     frames = []
 
-    for coin_id, coin_name in COINS.items():
-        coins_df = transform_coin_data(coin_id, coin_name)
+    for raw_file in raw_files:
+        print(f"Transforming {raw_file.name}")
+        coins_df = transform_coin_data(raw_file)
         frames.append(coins_df)
 
     final_df = pd.concat(frames, ignore_index= True)

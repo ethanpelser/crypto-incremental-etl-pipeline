@@ -9,7 +9,8 @@ BASE_URL = "https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart/range"
 DB_PATH = Path("crypto_prices.db")
 
 COINS = {"bitcoin": "Bitcoin",
-         "ethereum": "Ethereum"
+         "ethereum": "Ethereum",
+         "solana": "Solana"
 }
 
 CURRENCY = "usd"
@@ -130,7 +131,7 @@ def save_raw_data(data, coin_id):
     """Save raw API response as a JSON file
     """
 
-    output_path = Path(f"data/raw/{coin_id}_raw.json")
+    output_path = Path(f"data/raw/{coin_id}.json")
     output_path.parent.mkdir(parents=True, exist_ok = True)
 
     with open(output_path, "w", encoding = "utf-8") as file:
